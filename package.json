@@ -11,13 +11,15 @@
   "dependencies": {
     "@ignite-ui/react": "^2.2.4",
     "next": "14.2.3",
-    "react": "^18",
-    "react-dom": "^18"
+    "phosphor-react": "^1.4.1",
+    "react": "^18.2.0",
+    "react-dom": "^18",
+    "react-hook-form": "^7.51.3"
   },
   "devDependencies": {
     "@rocketseat/eslint-config": "^2.2.2",
     "@types/node": "^20",
-    "@types/react": "^18",
+    "@types/react": "^18.2.19",
     "@types/react-dom": "^18",
     "eslint": "^8",
     "eslint-config-next": "14.2.3",
