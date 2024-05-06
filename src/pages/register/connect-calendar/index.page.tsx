@@ -10,7 +10,6 @@ export default function ConnectCalendar() {
   const session = useSession()
   const hasAuthError = !!router.query.error
   const IsSignedIn = session.status === 'authenticated'
-
   async function handleConnectCalendar() {
     await signIn('google')
   }
