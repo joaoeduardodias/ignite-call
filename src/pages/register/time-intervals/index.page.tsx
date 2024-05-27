@@ -1,3 +1,4 @@
+import { api } from '@/lib/axios'
 import { convertTimeStringToMinutes } from '@/utils/conver-time-string-to-minutes'
 import { getWeekDays } from '@/utils/get-week-days'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -9,6 +10,7 @@ import {
   Text,
   TextInput,
 } from '@ignite-ui/react'
+import { useRouter } from 'next/router'
 import { ArrowRight } from 'phosphor-react'
 import { Controller, useFieldArray, useForm } from 'react-hook-form'
 import z from 'zod'
@@ -88,9 +90,11 @@ export default function TimeIntervals() {
     name: 'intervals',
     control,
   })
+  const router = useRouter()
 
   async function handleSetTimeIntervals(data: TimeIntervalsFormOutput) {
-    console.log(data)
+    await api.post('/users/time-intervals', data)
+    await router.push('/register/update-profile')
   }
   const weekDays = getWeekDays()
   const intervals = watch('intervals')

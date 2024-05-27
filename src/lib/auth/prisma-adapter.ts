@@ -1,11 +1,11 @@
-import { NextApiRequest, NextApiResponse } from 'next'
+import { NextApiRequest, NextApiResponse, NextPageContext } from 'next'
 import { Adapter } from 'next-auth/adapters'
 import { destroyCookie, parseCookies } from 'nookies'
 import { prisma } from '../prisma'
 
 export function PrismaAdapter(
-  req: NextApiRequest,
-  res: NextApiResponse,
+  req: NextApiRequest | NextPageContext['req'],
+  res: NextApiResponse | NextPageContext['res'],
 ): Adapter {
   return {
     async createUser(user) {
@@ -35,6 +35,7 @@ export function PrismaAdapter(
         username: prismaUser.username,
         emailVerified: null,
         avatar_url: prismaUser.avatar_url!,
+        bio: prismaUser.bio,
       }
     },
 
@@ -54,6 +55,7 @@ export function PrismaAdapter(
         username: user.username,
         emailVerified: null,
         avatar_url: user.avatar_url!,
+        bio: user.bio,
       }
     },
     async getUserByEmail(email) {
@@ -72,6 +74,7 @@ export function PrismaAdapter(
         username: user.username,
         emailVerified: null,
         avatar_url: user.avatar_url!,
+        bio: user.bio,
       }
     },
     async getUserByAccount({ providerAccountId, provider }) {
@@ -98,6 +101,7 @@ export function PrismaAdapter(
         username: user.username,
         emailVerified: null,
         avatar_url: user.avatar_url!,
+        bio: user.bio,
       }
     },
     async updateUser(user) {
@@ -109,6 +113,7 @@ export function PrismaAdapter(
           name: user.name,
           email: user.email,
           avatar_url: user.avatar_url,
+          bio: user.bio,
         },
       })
       return {
@@ -118,6 +123,7 @@ export function PrismaAdapter(
         username: prismaUser.username,
         emailVerified: null,
         avatar_url: prismaUser.avatar_url!,
+        bio: prismaUser.bio,
       }
     },
 
@@ -178,6 +184,7 @@ export function PrismaAdapter(
           username: user.username,
           emailVerified: null,
           avatar_url: user.avatar_url!,
+          bio: user.bio,
         },
       }
     },

@@ -10,6 +10,11 @@ export default async function handler(
     return res.status(405).end()
   }
   const { name, username } = req.body
+  if (!name || !username) {
+    return res.status(400).json({
+      message: 'Name and username are required.',
+    })
+  }
 
   const userExists = await prisma.user.findUnique({
     where: {
@@ -32,5 +37,5 @@ export default async function handler(
     maxAge: 60 * 60 * 24 * 7, // 7 days
     path: '/',
   })
-  return res.status(201).json(user)
+  return res.status(201).json({ name, username })
 }
