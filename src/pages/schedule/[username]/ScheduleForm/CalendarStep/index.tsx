@@ -7,7 +7,7 @@ export interface CalendarStepProps { }
 
 export function CalendarStep(props: CalendarStepProps) {
 
-  const [isDateSelected, setIsDateSelected] = useState(true)
+  const [isDateSelected, setIsDateSelected] = useState(false)
 
   return (
     <Container isTimePickerOpen={isDateSelected}>
