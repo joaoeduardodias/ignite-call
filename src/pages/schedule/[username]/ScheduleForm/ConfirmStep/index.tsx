@@ -20,7 +20,7 @@ export function ConfirmStep() {
   })
 
   function handleConfirmSchedulling(data: ConfirmFormData) {
-    console.log(data)
+
   }
 
   return (

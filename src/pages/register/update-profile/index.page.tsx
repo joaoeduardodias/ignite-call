@@ -29,7 +29,7 @@ export default function UpdateProfile() {
   const router = useRouter()
 
   const session = useSession()
-  console.log(session)
+
 
   async function handleUpdateProfile(data: UpdateProfileFormData) {
     await api.put('/users/profile', {

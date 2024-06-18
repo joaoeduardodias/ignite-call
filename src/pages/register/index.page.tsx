@@ -71,10 +71,14 @@ export default function Register() {
       <Form as="form" onSubmit={handleSubmit(handleRegister)}>
         <label>
           <Text size="sm">Nome de usuário</Text>
-          <TextInput
+          {/* <TextInput
             prefix="ignite.com/"
             placeholder="seu-usuário"
-            {...register('username')}
+
+
+          /> */}
+          <TextInput
+            prefix='ignite.com/' placeholder='seu-usuário' {...register('username')}
           />
           {errors.username && (
             <FormError size="sm">{errors.username.message}</FormError>
