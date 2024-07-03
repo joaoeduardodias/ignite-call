@@ -55,16 +55,20 @@ export function Calendar({ onDateSelected, selectedDate }: CalendarProps) {
       const response = await api.get(`/users/${username}/blocked-dates`, {
         params: {
           year: currentDate.get('year'),
-          month: currentDate.get('month'),
+          month: String(currentDate.get('month') + 1).padStart(2, '0'),
         }
       })
       return response.data
     }
 
   })
-  console.log(blockedDates)
 
   const calendarWeeks = useMemo(() => {
+
+    if (!blockedDates) {
+      return []
+    }
+
     const daysInMonthArray = Array.from({
       length: currentDate.daysInMonth(),
 
@@ -86,7 +90,7 @@ export function Calendar({ onDateSelected, selectedDate }: CalendarProps) {
       length: 7 - (lastWeekDay + 1),
     }).map((_, i) => {
       return lastDayInCurrentMonth.add(i + 1, 'day')
-    }).reverse()
+    })
 
     const calendarDays = [
       ...previousMonthFillArray.map(date => {
@@ -98,8 +102,8 @@ export function Calendar({ onDateSelected, selectedDate }: CalendarProps) {
       ...daysInMonthArray.map(date => {
         return {
           date,
-          disabled: !!(date.endOf('day').isBefore(new Date()) ||
-            blockedDates?.blockedWeekDays.includes(date.get('day'))),
+          disabled: date.endOf('day').isBefore(new Date()) ||
+            blockedDates.blockedWeekDays.includes(date.get('day')),
         }
       }),
       ...nextMonthFillArray.map(date => {
